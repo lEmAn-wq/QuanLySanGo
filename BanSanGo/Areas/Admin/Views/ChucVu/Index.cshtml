@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BanSanGo.Models.ChucVu>
+
+@{
+    ViewBag.Title = "Danh Sách Chức Vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center my-4">@ViewBag.Title</h2>
+            <hr />
+
+            <!-- Tạo mới chức vụ -->
+            <form action="@Url.Action("Create", "ChucVu")" method="post" class="d-flex align-items-center mb-3">
+                @Html.AntiForgeryToken()
+                <input type="text" name="TenCV" class="form-control me-2" placeholder="Nhập tên chức vụ" style="width: 200px;" />
+                <button class="btn btn-primary">Thêm</button>
+            </form>
+
+            <!-- Bảng danh sách chức vụ -->
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Chức Vụ</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.TenCV)</td>
+                                <td>
+                                    <!-- Chỉnh sửa -->
+                                    <div class="btn-group" role="group">
+                                        <form action="@Url.Action("Edit", "ChucVu")" method="get" style="display:inline;">
+                                            <input type="hidden" name="id" value="@item.MaCV" />
+                                            <button type="submit" class="btn btn-warning btn-sm me-4">Sửa</button>
+                                        </form>
+                                        <form action="@Url.Action("Delete", "ChucVu")" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.MaCV" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

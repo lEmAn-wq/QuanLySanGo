@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Xác Minh Mã";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg">
+                <h2 class="text-center mb-4">Xác Minh Mã</h2>
+
+                <!-- Display any messages -->
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-warning">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="inputCode">Mã Xác Minh</label>
+                        <input type="text" class="form-control" name="inputCode" placeholder="Nhập mã xác minh" />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Xác Minh</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

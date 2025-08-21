@@ -1,0 +1,51 @@
+﻿@model BanSanGo.Models.ChiTietHoaDon
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChiTietHoaDon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongMua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongMua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaMua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaMua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoaDon.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoaDon.TrangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SanGo.TenSanGo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanGo.TenSanGo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaCTHD }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

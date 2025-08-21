@@ -1,0 +1,72 @@
+﻿@model BanSanGo.Models.ChiTietHoaDon
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Chi Tiết Hóa Đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card p-4 shadow-lg border-0" style="background: linear-gradient(to right, #ffffff, #f8f9fa); border-radius: 15px;">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                        <!-- Mã Hóa Đơn -->
+                        <div class="form-group row mb-3">
+                            <label class="col-md-3 col-form-label fw-bold text-end">Mã Hóa Đơn</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" value="@ViewBag.MaHD" readonly />
+                                @Html.HiddenFor(model => model.MaHD)
+                            </div>
+                        </div>
+
+                        <!-- Tên Sàn Gỗ -->
+                        <div class="form-group row mb-3">
+                            <label class="col-md-3 col-form-label fw-bold text-end" for="MaSanGo">Tên Sàn Gỗ</label>
+                            <div class="col-md-9">
+                                @Html.DropDownList("MaSanGo", (SelectList)ViewBag.MaSanGo, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" })
+                                @Html.HiddenFor(model => model.MaSanGo)  <!-- Hidden field to submit selected value -->
+                                @Html.ValidationMessageFor(model => model.MaSanGo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Số Lượng Mua -->
+                        <div class="form-group row mb-3">
+                            <label class="col-md-3 col-form-label fw-bold text-end" for="SoLuongMua">Số Lượng Mua</label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.SoLuongMua, new { htmlAttributes = new { @class = "form-control", @id = "SoLuongMua" } })
+                                @Html.ValidationMessageFor(model => model.SoLuongMua, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Giá Mua -->
+                        <div class="form-group row mb-3">
+                            <label class="col-md-3 col-form-label fw-bold text-end" for="GiaMua">Giá Mua</label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.GiaMua, new { htmlAttributes = new { @class = "form-control", @id = "GiaMua" } })
+                                @Html.ValidationMessageFor(model => model.GiaMua, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Nút Lưu -->
+                        <div class="form-group row mb-3">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="submit" class="btn btn-success">Lưu Thay Đổi <i class="fas fa-save"></i></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("Quay Về Danh Sách", "Index", "ChiTietHoaDon", new { id = ViewBag.MaHD }, new { @class = "btn btn-secondary btn-lg" })
+    </div>
+</div>

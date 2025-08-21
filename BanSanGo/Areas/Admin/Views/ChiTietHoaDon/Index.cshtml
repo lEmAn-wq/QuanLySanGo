@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BanSanGo.Models.ChiTietHoaDon>
+
+@{
+    ViewBag.Title = "Chi Tiết Hóa Đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center my-4">@ViewBag.Title</h2>
+
+    <div class="mb-4">
+        <h4 class="text-muted">Thông Tin Hóa Đơn</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3 text-end fw-bold">Mã Hóa Đơn:</dt>
+            <dd class="col-sm-9">@ViewBag.id</dd>
+        </dl>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center">Không có chi tiết hóa đơn nào.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th class="align-middle">Tên Sàn Gỗ</th>
+                        <th class="align-middle">Số Lượng Mua</th>
+                        <th class="align-middle">Giá Mua (VNĐ)</th>
+                        <th class="align-middle">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-center align-middle">
+                            <td>@Html.DisplayFor(modelItem => item.SanGo.TenSanGo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoLuongMua)</td>
+                            <td>@String.Format("{0:N0} VNĐ", item.GiaMua)</td>
+                            <td>
+                                @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = item.MaCTHD }, new { @class = "btn btn-warning btn-sm me-2" })
+                                @Html.ActionLink("Xóa", "Delete", new { id = item.MaCTHD }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("Thêm Chi Tiết Hóa Đơn", "Create", new { id = ViewBag.id }, new { @class = "btn btn-success btn-lg me-2" })
+        @Html.ActionLink("Quay Về Danh Sách Hóa Đơn", "Index", "HoaDon", null, new { @class = "btn btn-secondary btn-lg" })
+    </div>
+</div>

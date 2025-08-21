@@ -1,0 +1,59 @@
+﻿@model BanSanGo.Models.NhanVien
+
+@{
+    ViewBag.Title = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card p-4 shadow-lg border-0" style="background: linear-gradient(to right, #ffffff, #f8f9fa); border-radius: 15px;">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Tên nhân viên:</th>
+                                    <td>@Html.DisplayFor(model => model.TenNV)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Ngày sinh:</th>
+                                    <td>@Model.NgaySinh.ToString("dd/MM/yyyy")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Giới tính:</th>
+                                    <td>@Html.DisplayFor(model => model.GioiTinh)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Số điện thoại:</th>
+                                    <td>@Html.DisplayFor(model => model.SDT)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Số CCCD:</th>
+                                    <td>@Html.DisplayFor(model => model.SoCCCD)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Email:</th>
+                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end text-primary fw-bold">Chức vụ:</th>
+                                    <td>@Html.DisplayFor(model => model.ChucVu.TenCV)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (Model.ChucVu.TenCV == "Admin")
+                    {
+                        <div class="text-center mt-4">
+                            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaNV }, new { @class = "btn btn-warning btn-lg" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model BanSanGo.Models.NhanVien
+
+@{
+    ViewBag.Title = "Tạo Nhân Viên Mới";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center my-4">@ViewBag.Title</h2>
+            <hr />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="form-group mb-3">
+                    <label for="TenNV" class="control-label">Tên Nhân Viên</label>
+                    @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control", @id = "TenNV" } })
+                    @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="NgaySinh" class="control-label">Ngày Sinh</label>
+                    @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @id = "NgaySinh" })
+                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="GioiTinh" class="control-label">Giới Tính</label>
+                    @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control", @id = "GioiTinh" } })
+                    @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="MaCV" class="control-label">Chức Vụ</label>
+                    @Html.DropDownList("MaCV", null, htmlAttributes: new { @class = "form-control", @id = "MaCV" })
+                    @Html.ValidationMessageFor(model => model.MaCV, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="SDT" class="control-label">Số Điện Thoại</label>
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @id = "SDT" } })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="SoCCCD" class="control-label">Số CCCD</label>
+                    @Html.EditorFor(model => model.SoCCCD, new { htmlAttributes = new { @class = "form-control", @id = "SoCCCD" } })
+                    @Html.ValidationMessageFor(model => model.SoCCCD, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-5">
+                    <label for="Email" class="control-label">Email</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group text-center mb-3">
+                    <button type="submit" class="btn btn-primary">Tạo</button>
+                    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary ms-2" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

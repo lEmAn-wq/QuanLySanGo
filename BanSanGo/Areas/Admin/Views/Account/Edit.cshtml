@@ -1,0 +1,98 @@
+﻿@model BanSanGo.Models.NhanVien
+
+@{
+    ViewBag.Title = "Chỉnh sửa thông tin tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card p-4 shadow-lg border-0" style="background: linear-gradient(to right, #ffffff, #f8f9fa); border-radius: 15px;">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                            @Html.HiddenFor(model => model.MaNV)
+
+                            <!-- Tên nhân viên -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.TenNV, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Ngày sinh -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.NgaySinh, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Giới tính -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Chức vụ -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.MaCV, "Chức vụ", htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.DropDownList("MaCV", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MaCV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Số điện thoại -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Số CCCD -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.SoCCCD, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.SoCCCD, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SoCCCD, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group row mb-3">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-3 col-form-label fw-bold text-end" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Nút submit -->
+                            <div class="form-group row mb-3">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Lưu thay đổi <i class="fas fa-save"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model BanSanGo.Models.NhanVien
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Nhân Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center my-4">@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mb-4">
+        <h4 class="text-muted">Thông Tin Nhân Viên</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        @Html.HiddenFor(model => model.MaNV)
+
+        <div class="mb-3 row">
+            <label for="TenNV" class="col-sm-2 col-form-label text-end">Tên Nhân Viên</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control", @id = "TenNV" } })
+                @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="NgaySinh" class="col-sm-2 col-form-label text-end">Ngày Sinh</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @id = "NgaySinh" })
+                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="GioiTinh" class="col-sm-2 col-form-label text-end">Giới Tính</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control", @id = "GioiTinh" } })
+                @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="MaCV" class="col-sm-2 col-form-label text-end">Chức Vụ</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("MaCV", null, htmlAttributes: new { @class = "form-control", @id = "MaCV" })
+                @Html.ValidationMessageFor(model => model.MaCV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="SDT" class="col-sm-2 col-form-label text-end">Số Điện Thoại</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @id = "SDT" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="SoCCCD" class="col-sm-2 col-form-label text-end">Số CCCD</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.SoCCCD, new { htmlAttributes = new { @class = "form-control", @id = "SoCCCD" } })
+                @Html.ValidationMessageFor(model => model.SoCCCD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="Email" class="col-sm-2 col-form-label text-end">Email</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                @Html.ActionLink("Quay Về Danh Sách", "Index", null, new { @class = "btn btn-secondary ms-2" })
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Xác Minh Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg">
+                <h2 class="text-center mb-4">Xác Minh Email</h2>
+
+                <!-- Display any verification code errors -->
+                @if (TempData["VerificationCodeError"] != null)
+                {
+                    <div class="alert alert-warning">
+                        @TempData["VerificationCodeError"]
+                    </div>
+                }
+
+                <!-- Display success message if the verification code was resent -->
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["Message"]
+                    </div>
+                }
+
+                <!-- Form for verifying the input code -->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="inputCode">Mã Xác Minh</label>
+                        @Html.TextBox("inputCode", null, new { @class = "form-control", @placeholder = "Nhập mã xác minh" })
+                        @Html.ValidationMessage("inputCode", "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Xác Minh</button>
+                }
+
+                <!-- Form for resending the verification code -->
+                <div class="text-center mt-3">
+                    @using (Html.BeginForm("ResendVerificationCode", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-secondary">Gửi Lại Mã Xác Minh</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

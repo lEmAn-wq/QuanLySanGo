@@ -1,0 +1,72 @@
+﻿@model BanSanGo.Models.SanGo
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h2 class="text-center display-4 my-4">@ViewBag.Title</h2>
+            <h3 class="text-center text-danger">Bạn có chắc chắn muốn xóa sản phẩm này?</h3>
+
+            <div class="card shadow-lg mb-4" style="background: linear-gradient(to right, #fff, #f8d7da); border-radius: 15px;">
+                <div class="card-header bg-danger text-white" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="m-0"><i class="fas fa-trash-alt"></i> @Model.TenSanGo</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Thông tin sản phẩm -->
+                        <div class="col-md-6">
+                            <h5 class="text-danger"><i class="fas fa-info-circle"></i> Thông tin sản phẩm</h5>
+                            <dl class="row">
+                                <dt class="col-sm-5 text-end">Tên sản phẩm:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.TenSanGo)</dd>
+
+                                <dt class="col-sm-5 text-end">Số lượng:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.SoLuong)</dd>
+
+                                <dt class="col-sm-5 text-end">Giá bán:</dt>
+                                <dd class="col-sm-7">@String.Format("{0:N0} VNĐ", Model.GiaBan)</dd>
+
+                                <dt class="col-sm-5 text-end">Mô tả:</dt>
+                                <dd class="col-sm-7" style="word-wrap: break-word;">@Html.DisplayFor(model => model.MoTa)</dd>
+
+                                <dt class="col-sm-5 text-end">Loại sản phẩm:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.LoaiSanGo.TenLoaiSanGo)</dd>
+                            </dl>
+                        </div>
+
+                        <!-- Hình ảnh sản phẩm -->
+                        <div class="col-md-6">
+                            <h5 class="text-danger"><i class="fas fa-image"></i> Hình ảnh sản phẩm</h5>
+                            <div class="text-center">
+                                @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                                {
+                                    <img src="@Model.HinhAnh" alt="Hình ảnh sản phẩm" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;" />
+                                }
+                                else
+                                {
+                                    <p class="text-muted">Chưa có hình ảnh</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-between">
+                    <div>
+                        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary btn-sm" })
+                    </div>
+                    <div>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Xóa sản phẩm</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
